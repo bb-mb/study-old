@@ -8,10 +8,13 @@ function App() {
   useEffect(() => {
     document.title = `You clicked ${count} times`;
     console.log('use effect')
-  })
+    return () => {
+      console.log('clean up')
+    }
+  }, [count])
   useEffect(() => {
     console.log(arr1)
-  })
+  }, [arr1])
 
   return (
     <div className="App">
