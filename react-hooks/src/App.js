@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import Count from './Count'
 import "./App.css"
+
+export const countContext = React.createContext()
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,12 +20,12 @@ function App() {
   }, [arr1])
 
   return (
-    <div className="App">
-      <h1>{count}</h1>
+    <countContext.Provider className="App" value={{count}}>
+      <Count />
       <button onClick={() => setCount(count + 1)}>up</button>
       <button onClick={() => setCount(count - 1)}>down</button>
       <button onClick={() => setArr1([...arr1, count])}>arr1</button>
-    </div>
+    </countContext.Provider>
   );
 }
 
