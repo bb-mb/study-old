@@ -22,6 +22,14 @@ const [count, setCount] = useState(0)
 - context를 사용하면 A에서 context에 등록한 값들을 C에서 바로 꺼내 쓸 수 있다.
 - context는 이미 있는 기능이고 useContext는 이를 더 편하게 쓰도록 하는 방법임. (context.Consumer 대신 사용)
 
+### useRef
+- 돔에 직접적인 접근
+- input 요소에 ref를 달면 ref.current.value로 input 요소의 값을 참조할 수 있음.
+
+### useReducer
+- 리덕스 라이브러리를 쓰지 않고 hooks만으로 리덕스 기능을 사용할 수 있음.
+- 리듀서를 정의하고 디스패치를 context에 넘겨줘서 useContext로 디스패치를 불러와 사용하면된다.
+
 ### 커스텀 hook
 - 외부함수를 만들어 useEffect(callback, [])으로 작업을 수행하고 컴포넌트에서 해당 함수를 실행.
 
