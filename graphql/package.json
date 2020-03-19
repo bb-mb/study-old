@@ -4,10 +4,16 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "graphql-yoga": "^1.18.3"
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "babel-node": "0.0.1-security",
+    "graphql-yoga": "^1.18.3",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {},
   "scripts": {
+    "start": "nodemon --exec babel-node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
