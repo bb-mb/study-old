@@ -1,17 +1,48 @@
-var users = [
-  { id: 10, name: 'ID', age: 36 },
-  { id: 20, name: 'BJ', age: 32 },
-  { id: 30, name: 'JM', age: 32 },
-  { id: 40, name: 'PJ', age: 27 },
-  { id: 50, name: 'HA', age: 25 },
-  { id: 60, name: 'JE', age: 26 },
-  { id: 70, name: 'JI', age: 31 },
-  { id: 80, name: 'MP', age: 23 },
-  { id: 90, name: 'FP', age: 13 }
-];
+ocument.addEventListener("DOMContentLoaded", function () {
+  var lazyloadImages
 
-function _values(data){
-  return data.map(function(val) {return val})
-}
+  if ("IntersectionObserver" in window) {
+    lazyloadImages = document.querySelectorAll(".lazy")
+    var imageObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var image = entry.target
+          image.classList.remove("lazy")
+          imageObserver.unobserve(image)
+        }
+      })
+    })
 
-console.log(_values(users))
+    lazyloadImages.forEach(function (image) {
+      imageObserver.observe(image)
+    })
+  } else {
+    var lazyloadThrottleTimeout
+    lazyloadImages = document.querySelectorAll(".lazy")
+
+    function lazyload() {
+      if (lazyloadThrottleTimeout) {
+        clearTimeout(lazyloadThrottleTimeout)
+      }
+
+      lazyloadThrottleTimeout = setTimeout(function () {
+        var scrollTop = window.pageYOffset
+        lazyloadImages.forEach(function (img) {
+          if (img.offsetTop < window.innerHeight + scrollTop) {
+            img.src = img.dataset.src
+            img.classList.remove("lazy")
+          }
+        })
+        if (lazyloadImages.length == 0) {
+          document.removeEventListener("scroll", lazyload)
+          window.removeEventListener("resize", lazyload)
+          window.removeEventListener("orientationChange", lazyload)
+        }
+      }, 20)
+    }
+
+    document.addEventListener("scroll", lazyload)
+    window.addEventListener("resize", lazyload)
+    window.addEventListener("orientationChange", lazyload)
+  }
+})
