@@ -1,6 +1,12 @@
-const str = new String('aaa')
-const str2 = str
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+const func = async () => {
+  console.log(3)
+  await timeout(1000)
+  console.log(4)
+}
 
-console.log(typeof(str))
-console.log(str === str2)
-console.log(str)
+console.log(1)
+func()
+console.log(2)
