@@ -1,0 +1,18 @@
+.desktop-background {
+  display: flex;
+  justify-content: center;
+  background-color: steelblue;
+  width: 100vw;
+  height: 100vh;
+}
+
+.App {
+  background-color: white;
+  height: 100%;
+}
+
+@media screen and (min-width: 400px) {
+  .App {
+    width: 420px;
+  }
+}
